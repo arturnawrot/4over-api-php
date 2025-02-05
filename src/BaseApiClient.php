@@ -129,7 +129,11 @@ class BaseApiClient {
     {
         $request = $this->prepareRequest($method, $this->prepareUri($path));
 
-        $response = $this->getHttpClient()->send($request, $params);
+        try {
+            $response = $this->getHttpClient()->send($request, $params);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            throw new \Exception($e->getResponse()->getBody()->getContents());
+        }
 
         if($response->getStatusCode() !== 200)
             throw new \Exception('Something went wrong...'); 

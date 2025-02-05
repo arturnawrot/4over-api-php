@@ -51,7 +51,7 @@ class OrderService extends AbstractService
         string $ship_from_country,
         string $shipping_method,
         string $shipping_code,
-        string $profile_token = '1010101010' // Default dummy token is 1010101010
+        ?string $profile_token = null
     ) : OrderCreatedResponse
     {
         $postBodyData = [
@@ -100,11 +100,18 @@ class OrderService extends AbstractService
                         'shipping_code' => $shipping_code
                     ]
                 ]
-            ],
-            'payment' => [
-                'profile_token' => $profile_token
             ]
         ];
+
+        if($this->isSandboxMode() and $profile_token === null) {
+            $profile_token = '1010101010'; // Default dummy token is 1010101010
+        }
+
+        if($profile_token !== null) {
+            $postBodyData['payment'] = [
+                'profile_token' => $profile_token
+            ];
+        }
 
         return $this->getResource(
             'POST',

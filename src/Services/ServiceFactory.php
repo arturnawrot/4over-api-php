@@ -2,8 +2,6 @@
 
 namespace FourOver\Services;
 
-use FourOver\Entities\File\FileCreatedResponse;
-
 class ServiceFactory
 {
     /**
@@ -14,7 +12,8 @@ class ServiceFactory
         'categories' => CategoryService::class,
         'shipping' => ShippingService::class,
         'orders' => OrderService::class,
-        'files' => FileService::class
+        'files' => FileService::class,
+        'paymentProfiles' => PaymentProfileService::class
     ];
 
     /**

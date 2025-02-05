@@ -10,7 +10,7 @@ class OrderCreatedResponse extends BaseEntity
 {
    public string $order_status;
 
-   public string $customer_order_id;
+   public ?string $customer_order_id;
 
    public array $job_ids;
 
