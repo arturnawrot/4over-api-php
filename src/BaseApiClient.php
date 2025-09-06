@@ -105,7 +105,7 @@ class BaseApiClient {
      */
     public function isSandboxMode() : bool
     {
-        return $this->getEnvironment() === 'SANDBOX' ? true : false;
+        return $this->getEnvironment() === 'SANDBOX';
     }
 
     /**
